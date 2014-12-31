@@ -115,5 +115,12 @@ void setup()
 
 void loop()
 {
-  
+  fullForward();
+  delay(500);
+  fullStop();
+  delay(500);
+  fullReverse();
+  delay(500);
+  fullStop();
+  delay(500);
 }
