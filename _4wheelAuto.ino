@@ -1,3 +1,4 @@
+//***Globals and constants***
 //Needs to be on pulse width module input
 const int EN2 = 5; //Front Right Tire
 const int EN1 = 3; //Back Right Tire
@@ -17,6 +18,9 @@ const int MCR2 = 13;
 const int MCR3 = 11; //Back Left Tire Set
 const int MCR4 = 8;
 
+
+// ***Helper Methods***
+//Set all 4 tires to stopped
 void fullStop()
 {
  digitalWrite(EN1, LOW);
@@ -40,6 +44,55 @@ void fullStop()
  digitalWrite(EN4, HIGH);  
 }
 
+//Go straight ahead full force
+void fullForward()
+{
+  digitalWrite(EN1, LOW);
+  digitalWrite(MCL1, HIGH);
+  digitalWrite(MCL2, LOW);
+  analogWrite(EN1, 255);
+  
+  digitalWrite(EN2, LOW);
+  digitalWrite(MCL3, HIGH);
+  digitalWrite(MCL4, LOW);
+  analogWrite(EN2, 255);
+  
+  digitalWrite(EN3, LOW);
+  digitalWrite(MCR1, HIGH);
+  digitalWrite(MCR2, LOW);
+  analogWrite(EN3, 255);
+  
+  digitalWrite(EN4, LOW);
+  digitalWrite(MCR1, HIGH);
+  digitalWrite(MCR2, LOW);
+  analogWrite(EN4, 255);
+}
+
+//Go in reverse full force
+void fullReverse()
+{
+  digitalWrite(EN1, LOW);
+  digitalWrite(MCL1, LOW);
+  digitalWrite(MCL2, HIGH);
+  analogWrite(EN1, 255);
+  
+  digitalWrite(EN2, LOW);
+  digitalWrite(MCL3, LOW);
+  digitalWrite(MCL4, HIGH);
+  analogWrite(EN2, 255);
+  
+  digitalWrite(EN3, LOW);
+  digitalWrite(MCR1, LOW);
+  digitalWrite(MCR2, HIGH);
+  analogWrite(EN3, 255);
+  
+  digitalWrite(EN4, LOW);
+  digitalWrite(MCR1, LOW);
+  digitalWrite(MCR2, HIGH);
+  analogWrite(EN4, 255);
+}
+
+//***Setup and Loop Code ***
 void setup()
 {
   pinMode(EN1, OUTPUT);
