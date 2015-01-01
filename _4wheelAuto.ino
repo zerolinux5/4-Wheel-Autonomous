@@ -23,15 +23,15 @@ const int MCR4 = 8;
 //Set all 4 tires to stopped
 void fullStop()
 {
- digitalWrite(EN1, LOW);
+ digitalWrite(EN2, LOW);
  digitalWrite(MCL1, LOW);
  digitalWrite(MCL2, LOW);
- digitalWrite(EN1, HIGH); 
+ digitalWrite(EN2, HIGH); 
  
- digitalWrite(EN2, LOW);
+ digitalWrite(EN1, LOW);
  digitalWrite(MCL3, LOW);
  digitalWrite(MCL4, LOW);
- digitalWrite(EN2, HIGH);
+ digitalWrite(EN1, HIGH);
 
  digitalWrite(EN3, LOW);
  digitalWrite(MCR1, LOW);
@@ -39,23 +39,23 @@ void fullStop()
  digitalWrite(EN3, HIGH); 
 
  digitalWrite(EN4, LOW);
- digitalWrite(MCR1, LOW);
- digitalWrite(MCR2, LOW);
+ digitalWrite(MCR3, LOW);
+ digitalWrite(MCR4, LOW);
  digitalWrite(EN4, HIGH);  
 }
 
 //Go straight ahead full force
 void fullForward()
 {
-  digitalWrite(EN1, LOW);
+  digitalWrite(EN2, LOW);
   digitalWrite(MCL1, HIGH);
   digitalWrite(MCL2, LOW);
-  analogWrite(EN1, 255);
+  analogWrite(EN2, 255);
   
-  digitalWrite(EN2, LOW);
+  digitalWrite(EN1, LOW);
   digitalWrite(MCL3, HIGH);
   digitalWrite(MCL4, LOW);
-  analogWrite(EN2, 255);
+  analogWrite(EN1, 255);
   
   digitalWrite(EN3, LOW);
   digitalWrite(MCR1, HIGH);
@@ -63,23 +63,23 @@ void fullForward()
   analogWrite(EN3, 255);
   
   digitalWrite(EN4, LOW);
-  digitalWrite(MCR1, HIGH);
-  digitalWrite(MCR2, LOW);
+  digitalWrite(MCR3, HIGH);
+  digitalWrite(MCR4, LOW);
   analogWrite(EN4, 255);
 }
 
 //Go in reverse full force
 void fullReverse()
 {
-  digitalWrite(EN1, LOW);
+  digitalWrite(EN2, LOW);
   digitalWrite(MCL1, LOW);
   digitalWrite(MCL2, HIGH);
-  analogWrite(EN1, 255);
+  analogWrite(EN2, 255);
   
-  digitalWrite(EN2, LOW);
+  digitalWrite(EN1, LOW);
   digitalWrite(MCL3, LOW);
   digitalWrite(MCL4, HIGH);
-  analogWrite(EN2, 255);
+  analogWrite(EN1, 255);
   
   digitalWrite(EN3, LOW);
   digitalWrite(MCR1, LOW);
@@ -87,8 +87,56 @@ void fullReverse()
   analogWrite(EN3, 255);
   
   digitalWrite(EN4, LOW);
+  digitalWrite(MCR3, LOW);
+  digitalWrite(MCR4, HIGH);
+  analogWrite(EN4, 255);
+}
+
+//Turn Left about 90%
+void left()
+{
+  digitalWrite(EN2, LOW);
+  digitalWrite(MCL1, LOW);
+  digitalWrite(MCL2, HIGH);
+  analogWrite(EN2, 255);
+  
+  digitalWrite(EN1, LOW);
+  digitalWrite(MCL3, LOW);
+  digitalWrite(MCL4, HIGH);
+  analogWrite(EN1, 255);
+  
+  digitalWrite(EN3, LOW);
+  digitalWrite(MCR1, HIGH);
+  digitalWrite(MCR2, LOW);
+  analogWrite(EN3, 255);
+  
+  digitalWrite(EN4, LOW);
+  digitalWrite(MCR3, HIGH);
+  digitalWrite(MCR4, LOW);
+  analogWrite(EN4, 255);
+}
+
+//Turn Right about 90%
+void right()
+{
+  digitalWrite(EN2, LOW);
+  digitalWrite(MCL1, HIGH);
+  digitalWrite(MCL2, LOW);
+  analogWrite(EN2, 255);
+  
+  digitalWrite(EN1, LOW);
+  digitalWrite(MCL3, HIGH);
+  digitalWrite(MCL4, LOW);
+  analogWrite(EN1, 255);
+  
+  digitalWrite(EN3, LOW);
   digitalWrite(MCR1, LOW);
   digitalWrite(MCR2, HIGH);
+  analogWrite(EN3, 255);
+  
+  digitalWrite(EN4, LOW);
+  digitalWrite(MCR3, LOW);
+  digitalWrite(MCR4, HIGH);
   analogWrite(EN4, 255);
 }
 
@@ -108,18 +156,18 @@ void setup()
   pinMode(MCR2, OUTPUT);
   
   pinMode(EN4, OUTPUT);
-  pinMode(MCR1, OUTPUT);
-  pinMode(MCR2, OUTPUT);
+  pinMode(MCR3, OUTPUT);
+  pinMode(MCR4, OUTPUT);
   fullStop();
 }
 
 void loop()
 {
-  fullForward();
+  left();
   delay(500);
   fullStop();
   delay(500);
-  fullReverse();
+  right();
   delay(500);
   fullStop();
   delay(500);
