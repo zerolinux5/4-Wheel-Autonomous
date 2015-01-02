@@ -1,3 +1,5 @@
+#include <Servo.h>
+
 //***Globals and constants***
 //Needs to be on pulse width module input
 const int EN2 = 5; //Front Right Tire
@@ -9,6 +11,10 @@ const int EN4 = 10; //Back Left Tire
 const int SER = 11;
 const int LATCH = 12;
 const int CLK = 13;
+
+//Servo Pin
+const int SERVO = 6;
+Servo myServo;
 
 // ***Helper Methods***
 //Set all 4 tires to stopped
@@ -130,17 +136,32 @@ void setup()
   pinMode(SER, OUTPUT);
   pinMode(LATCH, OUTPUT);
   pinMode(CLK, OUTPUT);
-  fullStop();
+  //fullStop();
+  
+  //Attach the servo motor to the pin
+  myServo.attach(SERVO);
 }
 
 void loop()
 {
-  left();
+  /*left();
   delay(500);
   fullStop();
   delay(500);
   right();
   delay(500);
   fullStop();
+  delay(500);*/
+  
+  //Servo Movement Practice
+  myServo.write(0);
+  delay(1000);
+  myServo.write(45);
+  delay(1000);
+  myServo.write(90);
+  delay(1000);
+  myServo.write(135);
+  delay(1000);
+  myServo.write(179);
   delay(500);
 }
