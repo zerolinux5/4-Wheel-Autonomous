@@ -16,6 +16,10 @@ const int CLK = 13;
 const int SERVO = 6;
 Servo myServo;
 
+//PING Pin
+const int pingPin = 7;
+long duration, cm;
+
 // ***Helper Methods***
 //Set all 4 tires to stopped
 void fullStop()
@@ -124,6 +128,15 @@ void right()
   analogWrite(EN4, 255);
 }
 
+//Using PING arduino helper methods to get distance
+long microsecondsToCentimeters(long microseconds)
+{
+  // The speed of sound is 340 m/s or 29 microseconds per centimeter.
+  // The ping travels out and back, so to find the distance of the
+  // object we take half of the distance travelled.
+  return microseconds / 29 / 2;
+}
+
 //***Setup and Loop Code ***
 void setup()
 {
@@ -140,6 +153,7 @@ void setup()
   
   //Attach the servo motor to the pin
   myServo.attach(SERVO);
+  Serial.begin(9600);
 }
 
 void loop()
@@ -153,6 +167,7 @@ void loop()
   fullStop();
   delay(500);*/
   
+  /*
   //Servo Movement Practice
   myServo.write(0);
   delay(1000);
@@ -163,5 +178,21 @@ void loop()
   myServo.write(135);
   delay(1000);
   myServo.write(179);
-  delay(500);
+  delay(500);*/
+  
+  //PING Ultrasonic Sensor test
+  //Ping out
+  pinMode(pingPin, OUTPUT);
+  digitalWrite(pingPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pingPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin, LOW);
+  
+  //Read the Ping
+  pinMode(pingPin, INPUT);
+  duration = pulseIn(pingPin, HIGH);
+  cm = microsecondsToCentimeters(duration);
+  Serial.print(cm);
+  Serial.println("cm");
 }
